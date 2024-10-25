@@ -10,7 +10,7 @@
     <header>
     <!-- Top Bar -->
         <div class="top-bar">
-            <a href="CLOVERS.mp4" class="responsive-image custom-link">About Us</a>
+            <a href="cat/CLOVERS.mp4" class="responsive-image custom-link">About Us</a>
 <a onclick="opencustomercare()" class="responsive-image custom-link">Customer Support</a>
             <span class="responsive-image custom-link">Get 20% off your first order.</span>
     <!-- Login Button -->
@@ -35,18 +35,57 @@
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
 </div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
         </div>
     <!-- Main Header-->    
         <div class="main-header">
@@ -71,7 +110,7 @@
     <!-- Navigation bar with dropdowns -->
         <nav>
             <ul>
-                <li><a href="#">Deals</a></li>
+                <li><a href="index.html">Deals</a></li>
                 <li class="dropdown">
                     <a href="#">Food</a>
                     <ul class="dropdown-content">
@@ -135,8 +174,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="fruit/banana.png" alt="Banana" class="responsive-image">
-                        <h3>Banana</h3>
-                        <p class="price">₹365</p>
+                        <h3>Banana(1kg)</h3>
+                        <p class="price">₹70</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -149,8 +188,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="fruit/apple.png" alt="Apple" class="responsive-image">
-                        <h3>Apple</h3>
-                        <p class="price">₹74.99</p>
+                        <h3>Apple(1kg )</h3>
+                        <p class="price">₹170</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -163,8 +202,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="fruit/peach.png" alt="Peach" class="responsive-image">
-                        <h3>Peach</h3>
-                        <p class="price">₹45.99</p>
+                        <h3>Peach(500g)</h3>
+                        <p class="price">₹114</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -176,8 +215,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="fruit/grapes.png" alt="Grapes" class="responsive-image">
-                        <h3>Grapes</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <h3>Grapes(500g)</h3>
+                        <p class="price"> ₹75</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -189,8 +228,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="fruit/kiwi.png" alt="Kiwi" class="responsive-image">
-                        <h3>Kiwi</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <h3>Kiwi(200g)</h3>
+                        <p class="price"> ₹177</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -209,8 +248,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="fruit/amla.png" alt="Amla" class="responsive-image">
-                            <h3>Amla</h3>
-                            <p class="price">₹365</p>
+                            <h3>Amla(100g)</h3>
+                            <p class="price">₹65</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -223,8 +262,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="fruit/blueberries.png" alt="Blueberry" class="responsive-image">
-                            <h3>Blueberry</h3>
-                            <p class="price"> ₹74.99</p>
+                            <h3>Blueberry(125g)</h3>
+                            <p class="price"> ₹290</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -237,8 +276,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="fruit/mango.png" alt="Mango" class="responsive-image">
-                            <h3>Mango</h3>
-                            <p class="price">₹45.99</p>
+                            <h3>Mango(1kg)</h3>
+                            <p class="price">₹190</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -250,8 +289,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="fruit/orange.png" alt="Orange" class="responsive-image">
-                            <h3>Orange</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <h3>Orange(500g)</h3>
+                            <p class="price"> ₹185</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -263,8 +302,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="fruit/strawberry.png" alt="Strawberry" class="responsive-image">
-                            <h3>Strawberry</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <h3>Strawberry(200g)</h3>
+                            <p class="price"> ₹140</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>

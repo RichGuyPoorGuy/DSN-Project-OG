@@ -35,18 +35,57 @@
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
 </div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
         </div>
     <!-- Main Header-->    
         <div class="main-header">
@@ -71,7 +110,7 @@
     <!-- Navigation bar with dropdowns -->
         <nav>
             <ul>
-                <li><a href="#">Deals</a></li>
+                <li><a href="index.html">Deals</a></li>
                 <li class="dropdown">
                     <a href="#">Food</a>
                     <ul class="dropdown-content">
@@ -136,7 +175,7 @@
                     <div class="product-box">
                         <img src="drinks/cocacola.png" alt="Coca Cola" class="responsive-image">
                         <h3>Coca Cola</h3>
-                        <p class="price">₹365</p>
+                        <p class="price">₹25</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -150,7 +189,7 @@
                     <div class="product-box">
                         <img src="drinks/cocacoladiet can.png" alt="Cocacola Diet can" class="responsive-image">
                         <h3>Cocacola Diet can</h3>
-                        <p class="price">₹74.99</p>
+                        <p class="price">₹80</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -164,7 +203,7 @@
                     <div class="product-box">
                         <img src="drinks/pepsi.png" alt="Pespi" class="responsive-image">
                         <h3>Pespi</h3>
-                        <p class="price">₹45.99</p>
+                        <p class="price">₹45</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -177,7 +216,7 @@
                     <div class="product-box">
                         <img src="drinks/maaza.png" alt="Maaza" class="responsive-image">
                         <h3>Maaza</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <p class="price"> ₹50</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -190,7 +229,7 @@
                     <div class="product-box">
                         <img src="drinks/realfruit.png" alt="Real Fruit" class="responsive-image">
                         <h3>Real Fruit</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <p class="price"> ₹140</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -210,7 +249,7 @@
                         <div class="product-box">
                             <img src="drinks/sprite.png" alt="Sprite" class="responsive-image">
                             <h3>Sprite</h3>
-                            <p class="price">₹365</p>
+                            <p class="price">₹45</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -224,7 +263,7 @@
                         <div class="product-box">
                             <img src="drinks/sting.png" alt="Stink" class="responsive-image">
                             <h3>Stink</h3>
-                            <p class="price"> ₹74.99</p>
+                            <p class="price"> ₹45</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -238,7 +277,7 @@
                         <div class="product-box">
                             <img src="drinks/cocacola can.png" alt="Cocacola Can" class="responsive-image">
                             <h3>Cocacola Can</h3>
-                            <p class="price">₹45.99</p>
+                            <p class="price">₹60</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -251,7 +290,7 @@
                         <div class="product-box">
                             <img src="drinks/fanta.png" alt="Fanta" class="responsive-image">
                             <h3>Fanta</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <p class="price"> ₹60</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -264,7 +303,7 @@
                         <div class="product-box">
                             <img src="drinks/thumbsup can.png" alt="Thumbs Up" class="responsive-image">
                             <h3>Thumbs Up</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <p class="price"> ₹60</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>

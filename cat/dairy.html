@@ -35,18 +35,57 @@
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
 </div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
         </div>
     <!-- Main Header-->    
         <div class="main-header">
@@ -71,7 +110,7 @@
     <!-- Navigation bar with dropdowns -->
         <nav>
             <ul>
-                <li><a href="#">Deals</a></li>
+                <li><a href="index.html">Deals</a></li>
                 <li class="dropdown">
                     <a href="#">Food</a>
                     <ul class="dropdown-content">
@@ -135,8 +174,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="dairy/amul.png" alt="AMUL MILK" class="responsive-image">
-                        <h3>AMUL MILK</h3>
-                        <p class="price">₹365</p>
+                        <h3>AMUL MILK(1L)</h3>
+                        <p class="price">₹60</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -150,7 +189,7 @@
                     <div class="product-box">
                         <img src="dairy/browneggs.png" alt="Brown Eggs" class="responsive-image">
                         <h3>Brown Eggs</h3>
-                        <p class="price">₹74.99</p>
+                        <p class="price">₹400</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -163,8 +202,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="dairy/butter.png" alt="Butter" class="responsive-image">
-                        <h3>Butter</h3>
-                        <p class="price">₹45.99</p>
+                        <h3>Butter(200g)</h3>
+                        <p class="price">₹122</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -176,8 +215,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="dairy/cheese.png" alt="Cheese" class="responsive-image">
-                        <h3>Cheese</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <h3>Cheese(200g)</h3>
+                        <p class="price"> ₹145</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -189,8 +228,8 @@
                 <div class="product-slide">
                     <div class="product-box">
                         <img src="dairy/chocomilk.png" alt="Choco Milk" class="responsive-image">
-                        <h3>Choco Milk</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <h3>Choco Milk(180ml)</h3>
+                        <p class="price"> ₹40</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -209,8 +248,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="dairy/egg.png" alt="Eggs" class="responsive-image">
-                            <h3>Eggs</h3>
-                            <p class="price">₹365</p>
+                            <h3>Eggs(30 pieces)</h3>
+                            <p class="price">₹210</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -223,8 +262,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="dairy/fetacheese.png" alt="Feta Cheese" class="responsive-image">
-                            <h3>Feta Cheese</h3>
-                            <p class="price"> ₹74.99</p>
+                            <h3>Feta Cheese(100g)</h3>
+                            <p class="price"> ₹110</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -237,8 +276,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="dairy/yogurt.png" alt="Yogurt" class="responsive-image">
-                            <h3>Yogurt</h3>
-                            <p class="price">₹45.99</p>
+                            <h3>Yogurt(85g)</h3>
+                            <p class="price">₹60</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -250,8 +289,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="dairy/ghee.png" alt="Amul Ghee" class="responsive-image">
-                            <h3>Amul Ghee</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <h3>Amul Ghee(1L)</h3>
+                            <p class="price"> ₹560</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -263,8 +302,8 @@
                     <div class="product-slide">
                         <div class="product-box">
                             <img src="dairy/Mayonnaise.png" alt="Mayonnaise" class="responsive-image">
-                            <h3>Mayonnaise</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <h3>Mayonnaise(250g)</h3>
+                            <p class="price"> ₹90</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>

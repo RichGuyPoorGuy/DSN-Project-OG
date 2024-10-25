@@ -1,8 +1,37 @@
+// Initialize cart count from localStorage or set to 0 if not present
+let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+const cartCountElement = document.getElementById('cart-count');
+const cartNotification = document.getElementById('cart-notification');
+
+// Display the initial cart count on page load
+cartCountElement.textContent = cartCount;
+
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        cartCount++;
+        cartCountElement.textContent = cartCount;
+
+        // Store the updated cart count in localStorage
+        localStorage.setItem('cartCount', cartCount);
+
+        showNotification();
+    });
+});
+
+function showNotification() {
+    cartNotification.classList.add('show');
+    setTimeout(() => {
+        cartNotification.classList.remove('show');
+    }, 3000);
+}
+
+// Function to change slides automatically
 let currentSlide = 0; // Index of the current slide
 const slides = document.querySelectorAll('.slider .slide');
 const totalSlides = slides.length;
 
-// Function to change slides automatically
 function changeSlide() {
     // Remove 'active' class from the current slide
     slides[currentSlide].classList.remove('active');
@@ -17,6 +46,7 @@ function changeSlide() {
 // Set the slide to change every 6 seconds
 setInterval(changeSlide, 6000);
 
+// Slide controls for two sliders
 let currentIndex1 = 0;
 let currentIndex2 = 0;
 
@@ -74,35 +104,66 @@ function closeLoginForm() {
     document.getElementById("loginModal").style.display = "none";
 }
 
-// Open the login popup
+// Open customer care popup
 function opencustomercare() {
     document.getElementById("loginModal1").style.display = "flex";
 }
 
-// Close the login popup
+// Close customer care popup
 function closecustomercare() {
     document.getElementById("loginModal1").style.display = "none";
 }
 
-
-// Initialize cart count
-let cartCount = 0;
-
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
-const cartCountElement = document.getElementById('cart-count');
-const cartNotification = document.getElementById('cart-notification');
-
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        cartCount++;
-        cartCountElement.textContent = cartCount;
-        showNotification();
-    });
+// Retrieve and display the cart count when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+    const cartCountElement = document.getElementById('cart-count');
+    cartCountElement.textContent = cartCount;
 });
 
-function showNotification() {
-    cartNotification.classList.add('show');
-    setTimeout(() => {
-        cartNotification.classList.remove('show');
-    }, 3000);
-}
+
+// Login form submission handler
+document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+  
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // User logged in successfully
+        document.getElementById('login-success').style.display = 'block';
+        document.getElementById('login-success').textContent = 'Login Successful!';
+        setTimeout(() => {
+          document.getElementById('login-success').style.display = 'none';
+        }, 3000);
+      })
+      .catch((error) => {
+        // Error occurred during login
+      });
+  });
+      
+  // Listen for authentication state changes
+  firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const uid = user.uid;
+        const usersRef = firebase.database().ref('users');
+        usersRef.child(uid).on('value', (snapshot) => {
+          const userData = snapshot.val();
+          console.log('User data:', userData);
+        });
+      }
+    });
+  
+  // After successful registration, redirect to login
+  alert('Account created successfully! Please log in.');
+  window.location.href = 'login.html';  // Change 'login.html' to your login page if needed.
+  
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(() => {
+  // Existing and future Auth states will now persist across tabs and reloads
+      console.log('Persistence set to LOCAL');
+  })
+  .catch((error) => {
+      console.error('Error setting persistence:', error);
+  });
+  

@@ -32,21 +32,61 @@
 </div>
         </div>
     <!-- The Modal -->
+<!-- The Modal -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
 </div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
         </div>
     <!-- Main Header-->    
         <div class="main-header">
@@ -71,7 +111,7 @@
     <!-- Navigation bar with dropdowns -->
         <nav>
             <ul>
-                <li><a href="#">Deals</a></li>
+                <li><a href="index.html">Deals</a></li>
                 <li class="dropdown">
                     <a href="#">Food</a>
                     <ul class="dropdown-content">
@@ -136,7 +176,7 @@
                     <div class="product-box">
                         <img src="sweet/I2.png" alt="Choco Chip Ice Cream" class="responsive-image">
                         <h3>Choco Chip Ice Cream</h3>
-                        <p class="price">₹365</p>
+                        <p class="price">₹165</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -150,7 +190,7 @@
                     <div class="product-box">
                         <img src="sweet/I1.png" alt="Ice Cream" class="responsive-image">
                         <h3>Ice Cream Cone</h3>
-                        <p class="price">₹74.99</p>
+                        <p class="price">₹100</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -164,7 +204,7 @@
                     <div class="product-box">
                         <img src="sweet/I9.png" alt="Strawberry Ice Cream" class="responsive-image">
                         <h3>Strawberry Ice Cream</h3>
-                        <p class="price">₹45.99</p>
+                        <p class="price">₹140</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -177,7 +217,7 @@
                     <div class="product-box">
                         <img src="sweet/I10.png" alt="Brownie Ice Cream" class="responsive-image">
                         <h3>Brownie Ice Cream</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <p class="price"> ₹120</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -190,7 +230,7 @@
                     <div class="product-box">
                         <img src="sweet/I6.jpg" alt="Magnum Ice Cream" class="responsive-image">
                         <h3>Magnum Ice Cream</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <p class="price"> ₹190</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -210,7 +250,7 @@
                         <div class="product-box">
                             <img src="sweet/I3.png" alt="Vanilla" class="responsive-image">
                             <h3>Vanilla Ice Cream</h3>
-                            <p class="price">₹365</p>
+                            <p class="price">₹240</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -224,7 +264,7 @@
                         <div class="product-box">
                             <img src="sweet/I4.png" alt="Vadilal Choco" class="responsive-image">
                             <h3>Vadilal Choco</h3>
-                            <p class="price"> ₹74.99</p>
+                            <p class="price"> ₹260</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -238,7 +278,7 @@
                         <div class="product-box">
                             <img src="sweet/I5.png" alt="Vadilal Kesar Pista" class="responsive-image">
                             <h3>Vadilal Kesar Pista</h3>
-                            <p class="price">₹45.99</p>
+                            <p class="price">₹290</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -251,7 +291,7 @@
                         <div class="product-box">
                             <img src="sweet/I7.png" alt="Magnum Pack" class="responsive-image">
                             <h3>Magnum Pack</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <p class="price"> ₹360</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -264,7 +304,7 @@
                         <div class="product-box">
                             <img src="sweet/I8.png" alt="Havmor Ice Cream" class="responsive-image">
                             <h3>Havmor Ice Cream</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <p class="price"> ₹210</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>

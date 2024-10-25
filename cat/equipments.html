@@ -35,18 +35,57 @@
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
 </div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
         </div>
     <!-- Main Header-->    
         <div class="main-header">
@@ -71,7 +110,7 @@
     <!-- Navigation bar with dropdowns -->
         <nav>
             <ul>
-                <li><a href="#">Deals</a></li>
+                <li><a href="index.html">Deals</a></li>
                 <li class="dropdown">
                     <a href="#">Food</a>
                     <ul class="dropdown-content">
@@ -134,9 +173,9 @@
             <div class="slider1">
                 <div class="product-slide">
                     <div class="product-box">
-                        <img src="fruit/banana.png" alt="Banana" class="responsive-image">
-                        <h3>Banana</h3>
-                        <p class="price">₹365</p>
+                        <img src="equipments/D1.jpg" alt="Dumbbells" class="responsive-image">
+                        <h3>Dumbbells</h3>
+                        <p class="price">₹7,000</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -148,9 +187,9 @@
                 <!-- Repeat for other products -->
                 <div class="product-slide">
                     <div class="product-box">
-                        <img src="fruit/apple.png" alt="Apple" class="responsive-image">
-                        <h3>Apple</h3>
-                        <p class="price">₹74.99</p>
+                        <img src="equipments/D2.png" alt="Barbell Set" class="responsive-image">
+                        <h3>Barbell Set</h3>
+                        <p class="price">₹8,000</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -162,9 +201,9 @@
                 <!-- Add more products as needed -->
                 <div class="product-slide">
                     <div class="product-box">
-                        <img src="fruit/peach.png" alt="Peach" class="responsive-image">
-                        <h3>Peach</h3>
-                        <p class="price">₹45.99</p>
+                        <img src="equipments/D3.png" alt="Adjustable Dumbbells" class="responsive-image">
+                        <h3>Adjustable Dumbbells</h3>
+                        <p class="price">₹1,400</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -175,9 +214,9 @@
                 </div>
                 <div class="product-slide">
                     <div class="product-box">
-                        <img src="fruit/grapes.png" alt="Grapes" class="responsive-image">
-                        <h3>Grapes</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <img src="equipments/E1.png" alt="Weight Bench" class="responsive-image">
+                        <h3>Weight Bench</h3>
+                        <p class="price"> ₹6,000</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -188,9 +227,9 @@
                 </div>
                 <div class="product-slide">
                     <div class="product-box">
-                        <img src="fruit/kiwi.png" alt="Kiwi" class="responsive-image">
-                        <h3>Kiwi</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <img src="equipments/K1.png" alt="Kettlebells" class="responsive-image">
+                        <h3>Kettlebells</h3>
+                        <p class="price"> ₹2,000</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -208,9 +247,9 @@
                 <div class="slider1">
                     <div class="product-slide">
                         <div class="product-box">
-                            <img src="fruit/amla.png" alt="Amla" class="responsive-image">
-                            <h3>Amla</h3>
-                            <p class="price">₹365</p>
+                            <img src="equipments/B1.png" alt="Stability Ball" class="responsive-image">
+                            <h3>Stability Ball</h3>
+                            <p class="price">₹1,500</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -222,9 +261,9 @@
                     <!-- Repeat for other products -->
                     <div class="product-slide">
                         <div class="product-box">
-                            <img src="fruit/blueberries.png" alt="Blueberry" class="responsive-image">
-                            <h3>Blueberry</h3>
-                            <p class="price"> ₹74.99</p>
+                            <img src="equipments/T1.png" alt="Treadmill" class="responsive-image">
+                            <h3>Treadmill</h3>
+                            <p class="price"> ₹35,000 </p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -236,9 +275,9 @@
                     <!-- Add more products as needed -->
                     <div class="product-slide">
                         <div class="product-box">
-                            <img src="fruit/mango.png" alt="Mango" class="responsive-image">
-                            <h3>Mango</h3>
-                            <p class="price">₹45.99</p>
+                            <img src="equipments/C1.png" alt="Stationary Bike" class="responsive-image">
+                            <h3>Stationary Bike</h3>
+                            <p class="price">₹25,000</p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -249,9 +288,9 @@
                     </div>
                     <div class="product-slide">
                         <div class="product-box">
-                            <img src="fruit/orange.png" alt="Orange" class="responsive-image">
-                            <h3>Orange</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <img src="equipments/S1.png" alt="Stair Climber" class="responsive-image">
+                            <h3>Stair Climber</h3>
+                            <p class="price"> ₹1,30,000 </p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>
@@ -262,9 +301,9 @@
                     </div>
                     <div class="product-slide">
                         <div class="product-box">
-                            <img src="fruit/strawberry.png" alt="Strawberry" class="responsive-image">
-                            <h3>Strawberry</h3>
-                            <p class="price"> ₹20-₹50</p>
+                            <img src="equipments/L1.png" alt="Leg Extension Machine" class="responsive-image">
+                            <h3>Leg Extension Machine</h3>
+                            <p class="price"> ₹1,50,000 </p>
                             <div class="quantity">
                                 <button class="qty-btn minus">-</button>
                                 <input type="text" value="1" readonly>

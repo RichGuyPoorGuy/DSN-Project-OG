@@ -35,18 +35,57 @@
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
 </div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
         </div>
     <!-- Main Header-->    
         <div class="main-header">
@@ -71,7 +110,7 @@
     <!-- Navigation bar with dropdowns -->
         <nav>
             <ul>
-                <li><a href="#">Deals</a></li>
+                <li><a href="index.html">Deals</a></li>
                 <li class="dropdown">
                     <a href="#">Food</a>
                     <ul class="dropdown-content">
@@ -187,7 +226,7 @@
                         <span class="badge">Best Deal</span>
                         <img src="images/almond.jpg" alt="almond" class="responsive-image">
                         <h3>Almonds (200g)</h3>
-                        <p class="price"><s>₹420</s> ₹365</p>
+                        <p class="price"><s>₹200</s> ₹190</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -202,7 +241,7 @@
                         <span class="badge">Best Deal</span>
                         <img src="images/Maggi.jpg" alt="Maggi" class="responsive-image">
                         <h3>Maggi</h3>
-                        <p class="price"><s>₹84.99</s> ₹74.99</p>
+                        <p class="price"><s>₹60</s> ₹56</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -230,8 +269,8 @@
                     <div class="product-box">
                         <span class="badge">Best Deal</span>
                         <img src="images/chips.png" alt="Chips" class="responsive-image">
-                        <h3>Chips</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <h2>Chips</h2>
+                        <p class="price"> <s>₹80</s> ₹60</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -244,8 +283,8 @@
                     <div class="product-box">
                         <span class="badge">Best Deal</span>
                         <img src="images/biscuit.png" alt="Biscuit" class="responsive-image">
-                        <h3>Biscuit</h3>
-                        <p class="price"> ₹20-₹50</p>
+                        <h3>Hide & Seek Chocolate Chip Cookies</h3>
+                        <p class="price"><s>₹40</s> ₹35</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -273,8 +312,8 @@
                     <div class="product-box">
                         <span class="badge">Best Deal</span>
                         <img src="images/dettol.png" alt="Dettol" class="responsive-image">
-                        <h3>Dettol</h3>
-                        <p class="price"><s>₹59.99</s> ₹45.99</p>
+                        <h3>Dettol(250ml)</h3>
+                        <p class="price"><s>₹110</s> ₹99</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -288,8 +327,8 @@
                     <div class="product-box">
                         <span class="badge">Best Deal</span>
                         <img src="images/soap.png" alt="Soap" class="responsive-image">
-                        <h3>Soap</h3>
-                        <p class="price"><s>₹59.99</s> ₹45.99</p>
+                        <h3>Body wash(245ml)</h3>
+                        <p class="price"><s>₹115</s> ₹99</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -303,7 +342,7 @@
                         <span class="badge">Best Deal</span>
                         <img src="images/towel.png" alt="towel" class="responsive-image">
                         <h3>Towel</h3>
-                        <p class="price"><s>₹500 </s> ₹458</p>
+                        <p class="price"><s>₹499 </s> ₹458</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>
@@ -318,7 +357,7 @@
                         <span class="badge">Best Deal</span>
                         <img src="images/bottle.png" alt="Bottle" class="responsive-image">
                         <h3>Bottle</h3>
-                        <p class="price"><s>₹59.99</s> ₹45.99</p>
+                        <p class="price"><s>₹90</s> ₹75</p>
                         <div class="quantity">
                             <button class="qty-btn minus">-</button>
                             <input type="text" value="1" readonly>

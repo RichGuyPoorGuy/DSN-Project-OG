@@ -10,27 +10,82 @@
     <header>
     <!-- Top Bar -->
         <div class="top-bar">
-            <a href="#">About Us</a>
-            <a href="#">Customer Support</a>
-            <span>Get 20% off your first order.</span>
+            <a href="CLOVERS.mp4" class="responsive-image custom-link">About Us</a>
+<a onclick="opencustomercare()" class="responsive-image custom-link">Customer Support</a>
+            <span class="responsive-image custom-link">Get 20% off your first order.</span>
     <!-- Login Button -->
 <a onclick="openLoginForm()"><img src="images/login.png" alt="Log In"></a>
 
+<div id="loginModal1" class="modal1">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closecustomercare()">&times;</span>
+        <h2>Customer Care</h2>
+        <form>
+            <label for="Location">Location Availability:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your Location" required>
+
+            <label for="password">Talk To Us: 123-456-7890</label>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+        </div>
     <!-- The Modal -->
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeLoginForm()">&times;</span>
-        <h2>Login</h2>
-        <form>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <div class="modal-header">
+            <h2 id="login-register-title">Login</h2>
+        </div>
+        <div id="login" class="tab-content">
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="email" class="input-label">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password" class="input-label">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+                <button type="submit">Login</button>
+                <p id="error-message" style="color: red;"></p>
+                <p>Don't have an account? <a href="#" onclick="openTab('register')">Create One</a></p>
+            </form>
+        </div>
+        <div id="register" class="tab-content" style="display: none;">
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="registerEmail" class="input-label">Email:</label>
+                    <input type="email" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="registerPassword" class="input-label">Password:</label>
+                    <input type="password" id="registerPassword" placeholder="Enter your password" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-            <button type="submit">Login</button>
-        </form>
+                </div>
+                <div class="input-group">
+                    <label for="confirmPassword" class="input-label">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                
+                </div>
+                <button type="submit">Register</button>
+                <p id="registerErrorMessage" style="color: red;"></p>
+                <p>Already have an account? <a href="#" onclick="openTab('login')">Login Instead</a></p>
+            </form>
+        </div>
     </div>
+</div>
+<div id="register-success" style="display: none; color: green;"></div>
+<div id="login-success" style="display: none; color: green;"></div>
+
+<!-- Error Message for Registration -->
+<div id="registerErrorMessage"></div>
+
 
 </div>
         </div>
