@@ -1,3 +1,14 @@
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyDp7xTU84S2OarxDOIaHsjAFyVULOBLaKE",
+    authDomain: "food-store-8d1f2.firebaseapp.com",
+    databaseURL: "https://food-store-8d1f2-default-rtdb.firebaseio.com",
+    projectId: "food-store-8d1f2",
+    storageBucket: "food-store-8d1f2.firebasestorage.app",
+    messagingSenderId: "49920328384",
+    appId: "1:49920328384:web:23fdea1bb9d83a37bc2325",
+    measurementId: "G-TZ72GRPWJ3"
+  };
 // Initialize cart count from localStorage or set to 0 if not present
 let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
 const cartCountElement = document.getElementById('cart-count');
@@ -113,6 +124,25 @@ function opencustomercare() {
 function closecustomercare() {
     document.getElementById("loginModal1").style.display = "none";
 }
+
+function openTab(tabName) {
+    // Hide all tab contents
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(tab => {
+        tab.style.display = 'none';
+    });
+
+    // Show the selected tab
+    document.getElementById(tabName).style.display = 'block';
+
+    // Update the modal title based on the selected tab
+    const title = tabName === 'login' ? 'Login' : 'Register';
+    document.getElementById('login-register-title').textContent = title;
+
+    
+}
+
+
 
 // Retrieve and display the cart count when the page loads
 document.addEventListener('DOMContentLoaded', function() {
