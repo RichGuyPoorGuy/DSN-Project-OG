@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+      <!-- Notification for cart updates -->
+    <div id="cart-notification" class="notification">Item added to cart!</div>
+
+    <!-- Cart container -->
+    <div class="cart-container">
+        <!-- Ad sponsor on the left -->
+        
+
+        <!-- Cart content -->
+        <div class="cart-content">
+            <h1>Your Shopping Cart</h1>
+
+            <!-- Cart items will be displayed here -->
+            <div id="cart-items" class="cart-items"></div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+                <p>Total Items: <span id="total-items">0</span></p>
+                <p>Total Price: Rs<span id="total-price">0.00</span></p>
+                <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- Ad sponsor on the right -->
+        <div class="ad-right">
+            <img src="images/AD1.png" alt="Ad Sponsor 1" />
+        </div>
+    </div>
+
+    <!-- Include Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <script>
+        // Helper function to update localStorage
+function updateLocalStorage(cartItems) {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+}
+
+// Load and display cart items from localStorage
+function loadCartItems() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const cartItemsContainer = document.getElementById('cart-items');
+    const totalItemsElement = document.getElementById('total-items');
+    const totalPriceElement = document.getElementById('total-price');
+    let totalPrice = 0;
+
+    // Clear previous cart items
+    cartItemsContainer.innerHTML = '';
+
+    // Display each item in the cart
+    cartItems.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+        itemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" class="cart-item-img">
+            <div class="cart-item-details">
+                <h3>${item.title}</h3>
+                <p>Price: ₹${item.price}</p>
+                <div class="quantity">
+                    <button class="qty-btn" data-action="decrease">-</button>
+                    <input type="number" value="${item.quantity}" min="1" class="quantity-input">
+                    <button class="qty-btn" data-action="increase">+</button>
+                </div>
+                <button class="remove-btn">Remove</button>
+            </div>
+        `;
+        cartItemsContainer.appendChild(itemElement);
+
+        totalPrice += item.price * item.quantity;
+    });
+
+    // Update total items and total price
+    totalItemsElement.textContent = cartItems.length;
+    totalPriceElement.textContent = totalPrice.toFixed(2);
+}
+
+// Handle quantity update and item removal in the cart
+document.getElementById('cart-items').addEventListener('click', function(e) {
+    const cartItemElement = e.target.closest('.cart-item');
+    if (!cartItemElement) return;
+
+    const productTitle = cartItemElement.querySelector('h3').textContent;
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const itemIndex = cartItems.findIndex(item => item.title === productTitle);
+
+    if (e.target.matches('.qty-btn')) {
+        const quantityInput = cartItemElement.querySelector('.quantity-input');
+        let quantity = parseInt(quantityInput.value);
+        if (e.target.getAttribute('data-action') === 'increase') {
+            quantity++;
+        } else if (e.target.getAttribute('data-action') === 'decrease' && quantity > 1) {
+            quantity--;
+        }
+        quantityInput.value = quantity;
+
+        if (itemIndex !== -1) {
+            cartItems[itemIndex].quantity = quantity;
+            updateLocalStorage(cartItems);
+        }
+    } else if (e.target.matches('.remove-btn')) {
+        cartItems.splice(itemIndex, 1);
+        updateLocalStorage(cartItems);
+    }
+
+    loadCartItems(); // Refresh the cart
+});
+
+// Checkout button functionality
+document.getElementById('checkout-btn').addEventListener('click', function() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    if (cartItems.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+
+    fetch('http://localhost:4242/create-checkout-session', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            items: cartItems.map(item => ({
+                title: item.title,
+                quantity: item.quantity,
+                price: Math.round(item.price * 100) // Convert price to paise
+            }))
+        }),
+    })
+    .then(response => response.json())
+    .then(session => {
+        const stripe = Stripe('pk_test_51QQXJiF43iHU3dyOCPBzlRezOuc2mLmh84UQVoBAbugF0fxgXl2uRRrUeaSGivXJvhroTXJAdj4wt3rWjtKuEEV300LkyI1odk');
+        return stripe.redirectToCheckout({ sessionId: session.id });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while processing your request. Please try again later.');
+    });
+});
+
+// Load cart items on page load
+window.onload = loadCartItems;
+
+    </script>
+</body>
+</html>
